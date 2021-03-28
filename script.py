@@ -2,7 +2,12 @@ import csv
 import os
 import requests
 import json
-import keys
+
+try:
+    import keys
+except ImportError:
+    print("Please generate a api key, and store it into a file named keys.py")
+    exit(1)
 
 
 def getLocationData(latitude, longitude):
@@ -33,11 +38,10 @@ def createFile(input_file):
             writer = csv.writer(csvoutput, lineterminator='\n')
             reader = csv.reader(csvinput)
             # add country and continent columns
-            all = []
-            row = next(reader)
-            row.append('Country')
-            row.append('Continent')
-            all.append(row)
+            header_row = next(reader)
+            header_row.append('Country')
+            header_row.append('Continent')
+            writer.writerow(header_row)
 
             for row in reader:
                 if row[7] and row[8]:
