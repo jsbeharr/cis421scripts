@@ -31,13 +31,13 @@ def getLocationData(latitude, longitude):
         return '', ''
 
 
-def createFile(input_file):
+def createFile(input_file, output_file):
     """
     Description: Creates a new csv file with country and continent information
     Input: input_file - file to be read from
     """
     with open(input_file, 'r', encoding='utf-8') as csvinput:
-        with open('new-meteorite-landings.csv', 'w', encoding='utf-8') as csvoutput:
+        with open(output_file, 'w', encoding='utf-8') as csvoutput:
             # initialize writer and reader
             writer = csv.writer(csvoutput, lineterminator='\n')
             reader = csv.reader(csvinput)
@@ -62,7 +62,7 @@ def createFile(input_file):
 
 
 def main():
-    createFile('meteorite-landings.csv')
+    createFile('meteorite-landings.csv', 'new-meteorite-landings.csv')
     print('new-meteorite-landings.csv finished')
 
 
