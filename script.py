@@ -25,9 +25,7 @@ def getLocationData(latitude, longitude):
             return '', ''
         locationJSON = response.json()['data'][0]
         return locationJSON['country'], locationJSON['continent']
-    except requests.exceptions.RequestException:
-        return '', ''
-    except TypeError:
+    except (requests.exceptions.RequestException, IndexError, TypeError):
         return '', ''
 
 
